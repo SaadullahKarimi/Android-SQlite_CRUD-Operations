@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 datamodel  = new DataModel(Integer.parseInt(ID.getText().toString()), UserName.getText().toString(), Integer.parseInt(Password.getText().toString()));
                 Toast.makeText(MainActivity.this, datamodel.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, datamodel.toString(), Toast.LENGTH_SHORT).show();
 
                 boolean   success = databaseConnection.updateOne(datamodel);
                 Toast.makeText(MainActivity.this, "Success="+success, Toast.LENGTH_SHORT).show();
