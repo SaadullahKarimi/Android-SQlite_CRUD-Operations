@@ -1,4 +1,5 @@
 Contributing to [Android-SQLite_CRUD-Operations]
+
 This open-source app welcomes contributions from the community.
 
 Getting Started
