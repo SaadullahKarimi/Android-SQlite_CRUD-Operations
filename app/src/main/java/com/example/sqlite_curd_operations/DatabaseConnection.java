@@ -46,6 +46,24 @@ public class DatabaseConnection  extends SQLiteOpenHelper {
         return insert != -1;
 
     }
+
+    public DataModel getCustomerById(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT * FROM " + CUSTOMER_TABLE + " WHERE " + ID + " = " + id;
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            int customerId = cursor.getInt(0);
+            String customerName = cursor.getString(1);
+            int customerAge = cursor.getInt(2);
+            cursor.close();
+            return new DataModel(customerId, customerName, customerAge);
+        } else {
+            cursor.close();
+            return null; // Customer not found
+        }
+    }
+
     public void deleteOne(DataModel dataModel) {
 
         // find customerModel in the database. if it found, delete it and return true.
