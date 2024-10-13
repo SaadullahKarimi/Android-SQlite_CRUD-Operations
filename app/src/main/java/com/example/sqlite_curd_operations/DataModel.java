@@ -5,15 +5,13 @@ import androidx.annotation.NonNull;
 public class DataModel {
     private int id;
     private String Name;
-    private int age;
+    private int Age;
 
     // Constructor
-
-
     public DataModel(int id, String name, int age) {
         this.id = id;
         Name = name;
-        this.age = age;
+        this.Age = age;
     }
 
     @NonNull
@@ -22,10 +20,11 @@ public class DataModel {
         return "DataModel{" +
                 "id=" + id +
                 ", Name='" + Name + '\'' +
-                ", age=" + age +
+                ", age=" + Age +
                 '}';
     }
 
+    // Getter and Setter methods
     public int getId() {
         return id;
     }
@@ -43,12 +42,11 @@ public class DataModel {
     }
 
     public int getAge() {
-        return age;
+        return Age;
     }
 
     public void setAge(int age) {
-        this.age = age;
+        Age = age;
     }
-
 }
 
