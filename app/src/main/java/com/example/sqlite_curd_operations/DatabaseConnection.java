@@ -11,30 +11,27 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseConnection  extends SQLiteOpenHelper {
+public class DatabaseConnection extends SQLiteOpenHelper {
     public static final String CUSTOMER_NAME = "CUSTOMER_NAME";
     public static final String CUSTOMER_AGE = "CUSTOMER_AGE";
     public static final String ID = "ID";
-    public static final String CUSTOMER_TABLE = "Customer_Table";
+    public static final String CUSTOMER_TABLE = "CUSTOMER_TABLE";
 
     public DatabaseConnection(@Nullable Context context) {
-        super(context, "Customer.db", null, 1);
+        super(context, "Student1.db", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CreateTableStatement = "CREATE TABLE " + CUSTOMER_TABLE + "(" + ID +
-                " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                CUSTOMER_NAME + " TEXT, " + CUSTOMER_AGE + " INTEGER )";
+        String CreateTableStatement = "CREATE TABLE " + CUSTOMER_TABLE +
+                " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                CUSTOMER_NAME + " TEXT, " + CUSTOMER_AGE + " INTEGER)";
         db.execSQL(CreateTableStatement);
-
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-
+        // Implement schema changes and data message here when upgrading
     }
 
     public boolean addOne(DataModel dataModel) {
@@ -43,14 +40,43 @@ public class DatabaseConnection  extends SQLiteOpenHelper {
         cv.put(CUSTOMER_NAME, dataModel.getName());
         cv.put(CUSTOMER_AGE, dataModel.getAge());
         long insert = db.insert(CUSTOMER_TABLE, null, cv);
+        db.close();
         return insert != -1;
+    }
 
+    public void deleteOne(DataModel dataModel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String whereClause = ID + "=?";
+        String[] whereArgs = {String.valueOf(dataModel.getId())};
+        db.delete(CUSTOMER_TABLE, whereClause, whereArgs);
+        db.close();
+    }
+
+    public List<DataModel> getEveryOne() {
+        List<DataModel> returnlist = new ArrayList<>();
+        String queryString = "SELECT * FROM " + CUSTOMER_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int customerID = cursor.getInt(0);
+                String customerName = cursor.getString(1);
+                int customerAge = cursor.getInt(2);
+                DataModel newDataModel = new DataModel(customerID, customerName, customerAge);
+                returnlist.add(newDataModel);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();  // Always close the cursor
+        db.close();  // Always close the database
+        return returnlist;
     }
 
     public DataModel getCustomerById(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String queryString = "SELECT * FROM " + CUSTOMER_TABLE + " WHERE " + ID + " = " + id;
-        Cursor cursor = db.rawQuery(queryString, null);
+        String queryString = "SELECT * FROM " + CUSTOMER_TABLE + " WHERE " + ID + " = ?";
+        Cursor cursor = db.rawQuery(queryString, new String[]{String.valueOf(id)});
 
         if (cursor.moveToFirst()) {
             int customerId = cursor.getInt(0);
@@ -60,60 +86,21 @@ public class DatabaseConnection  extends SQLiteOpenHelper {
             return new DataModel(customerId, customerName, customerAge);
         } else {
             cursor.close();
-            return null; // Customer not found
+            return null;  // Customer not found
         }
-    }
-
-    public void deleteOne(DataModel dataModel) {
-
-        // find customerModel in the database. if it found, delete it and return true.
-        // if it is not found, return false
-        SQLiteDatabase db = this.getWritableDatabase();
-        String queryStrings = " DELETE FROM " + CUSTOMER_TABLE + " WHERE " + ID + " = " + dataModel.getId();
-        Cursor cursor;
-        cursor = db.rawQuery(queryStrings,null);
-
-        cursor.moveToNext();
     }
 
     public boolean updateOne(DataModel dataModel) {
-
-        // find customerModel in the database. if it found, delete it and return true.
-        // if it is not found, return false
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(ID, dataModel.getId());
         values.put(CUSTOMER_NAME, dataModel.getName());
         values.put(CUSTOMER_AGE, dataModel.getAge());
-        long update =    db.update(CUSTOMER_TABLE, values, ID + " = " +dataModel.getId(),null);
 
-        return update != -1;
-    }
+        String whereClause = ID + "=?";
+        String[] whereArgs = {String.valueOf(dataModel.getId())};
 
-
-    public List<DataModel> getEveryOne(){
-
-        List<DataModel> returnlist = new ArrayList<>();
-        //get data from the database
-        String queryString = "SELECT * FROM  CUSTOMER_TABLE";
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor= db.rawQuery(queryString,null);
-        if(cursor.moveToFirst()){
-            do{
-                int customerID = cursor.getInt(0);
-                String customerName = cursor.getString(1);
-                int customerAge = cursor.getInt(2);
-                DataModel newdataModel = new DataModel(customerID,customerName,customerAge);
-                returnlist.add(newdataModel);
-            } while (cursor.moveToNext());
-        }
-        //failure. do not add anything to the list
-
-        cursor.close();
+        int result = db.update(CUSTOMER_TABLE, values, whereClause, whereArgs);
         db.close();
-
-        return returnlist;
-
+        return result != -1;
     }
-
 }

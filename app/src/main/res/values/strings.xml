@@ -1,11 +1,12 @@
 <resources>
-    <string name="app_name">SQLite_CURD_Operations</string>
+    <string name="app_name">SQL</string>
     <string name="CustomerName">Customer Name</string>
     <string name="Age">Age</string>
     <string name="ActiveCustomer">Active Customer</string>
     <string name="SaveData">Save Data</string>
-    <string name="Showdata">Show Data</string>
+    <string name="ShowData">Show Data</string>
     <string name="UpdateData">Update Data</string>
-    <string name="updatedata">Update Data</string>
-    <string name="CustomerID"> Enter customer ID for updating record </string>
+    <string name="updateData">Update Data</string>
+    <string name="searchID">search ID</string>
+    <string name="CustomerID">Enter customer ID for updating record</string>
 </resources>
