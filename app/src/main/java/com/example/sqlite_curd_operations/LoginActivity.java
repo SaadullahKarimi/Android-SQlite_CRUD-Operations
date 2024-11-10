@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // بررسی اعتبار نام کاربری و رمز عبور
-                if (username.getText().toString().equals("hussain") && password.getText().toString().equals("hussain4321")) {
+                if (username.getText().toString().equals("user") && password.getText().toString().equals("123")) {
                     Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
