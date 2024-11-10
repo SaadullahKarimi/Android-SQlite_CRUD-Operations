@@ -1,113 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/et_ID"
-        android:layout_width="395dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="Enter customer ID for updating record"
-        android:inputType="text"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
-
-    <!--        app:layout_constraintTop_toBottomOf="@+id/et_name2" />-->
-
+        android:hint="@string/enter_customer_id_for_updating_record"
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/et_name"
-        android:layout_width="395dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:ems="10"
         android:hint="Customer Name"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.437"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_ID" />
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/et_Name2"
-        android:layout_width="395dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:ems="10"
         android:hint="Age"
-        android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@+id/et_name"
-        tools:layout_editor_absoluteX="7dp" />
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/et_search_id"
-        android:layout_width="397dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="12dp"
-        android:ems="10"
-        android:hint="Enter Your Name and ID"
-        android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@+id/et_Name2"
-        tools:layout_editor_absoluteX="7dp" />
-
-    <Button
-        android:id="@+id/btnsave"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Save Data"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.458"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_search_id" />
+        android:hint="Enter Your Name and ID"
+        android:inputType="number" />
+
+    <!-- Horizontal layout for buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="28dp">
+
+        <Button
+            android:id="@+id/btnsave"
+            android:layout_width="79dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="Save Data" />
+
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="104dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="Update Data" />
+
+        <Button
+            android:id="@+id/btnSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="2dp"
+            android:text="Search ID" />
+
+        <Button
+            android:id="@+id/DataShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+        android:text="Show Data" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/lstview"
-        android:layout_width="397dp"
-        android:layout_height="354dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSearch"
-        app:layout_constraintVertical_bias="0.4"
-        tools:ignore="ExtraText" />
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/btnUpdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
-        android:text="Update Data"
-        app:layout_constraintBottom_toTopOf="@+id/lstview"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/btnSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Search ID"
-        app:layout_constraintEnd_toStartOf="@+id/btnUpdate"
-        app:layout_constraintHorizontal_bias="0.444"
-        app:layout_constraintStart_toEndOf="@+id/DataShow"
-        app:layout_constraintTop_toBottomOf="@+id/btnsave" />
-
-    <Button
-        android:id="@+id/DataShow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="12dp"
-        android:text="Show Data"
-        app:layout_constraintBottom_toTopOf="@+id/lstview"
-        app:layout_constraintStart_toStartOf="parent" />
-    <!--        app:layout_constraintTop_toBottomOf="@+id/et_Name2" />-->
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

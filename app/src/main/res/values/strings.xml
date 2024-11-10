@@ -9,4 +9,7 @@
     <string name="updateData">Update Data</string>
     <string name="searchID">search ID</string>
     <string name="CustomerID">Enter customer ID for updating record</string>
+    <string name="enter_customer_id_for_updating_record">Enter customer ID for updating record</string>
+    <string name="login">Login</string>
+    <string name="Samit">Samit</string>
 </resources>
